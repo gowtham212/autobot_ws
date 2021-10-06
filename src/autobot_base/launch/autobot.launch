@@ -4,7 +4,7 @@
 
       <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
 
-      <include file="$(find autobot_base)/launch/tutorial.launch"/>
+      <include file="$(find autobot_base)/launch/autobot_slam.launch"/>
 
 
 </launch>
