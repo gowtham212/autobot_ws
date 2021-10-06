@@ -6,6 +6,7 @@
     type="serial_node.py"
     name="serial_publisher" 
     output="screen"
+    args="/dev/ttyACM0"
   />
 
 </launch>
