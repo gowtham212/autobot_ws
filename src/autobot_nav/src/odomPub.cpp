@@ -5,7 +5,10 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_ros/transform_broadcaster.h>
 #include <cmath>
- 
+ #include <ros/ros.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <geometry_msgs/TransformStamped.h>
+
 // Create odometry data publishers
 ros::Publisher odom_data_pub;
 ros::Publisher odom_data_pub_quat;
@@ -106,7 +109,21 @@ void publish_quat() {
   quatOdom.twist.twist.angular.x = odomNew.twist.twist.angular.x;
   quatOdom.twist.twist.angular.y = odomNew.twist.twist.angular.y;
   quatOdom.twist.twist.angular.z = odomNew.twist.twist.angular.z;
- 
+   static tf2_ros::TransformBroadcaster br;
+  geometry_msgs::TransformStamped transformStamped;
+  
+  transformStamped.header.stamp = ros::Time::now();
+  transformStamped.header.frame_id = "odom";
+  transformStamped.child_frame_id = "base_link";
+  transformStamped.transform.translation.x = odomNew.pose.pose.position.x;
+  transformStamped.transform.translation.y = odomNew.pose.pose.position.y;
+  transformStamped.transform.translation.z = 0.0;
+  transformStamped.transform.rotation.x = q.x();
+  transformStamped.transform.rotation.y = q.y();
+  transformStamped.transform.rotation.z = q.z();
+  transformStamped.transform.rotation.w = q.w();
+
+  br.sendTransform(transformStamped);
   for(int i = 0; i<36; i++) {
     if(i == 0 || i == 7 || i == 14) {
       quatOdom.pose.covariance[i] = .01;

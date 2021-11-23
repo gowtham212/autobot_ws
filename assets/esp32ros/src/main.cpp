@@ -21,7 +21,7 @@ ros::NodeHandle nh;
 ////////////////// Tick Data Publishing Variables and Constants ///////////////
 
 // Encoder output to Arduino Interrupt pin. Tracks the tick count.
-#define ENC_IN_LEFT_A 15
+#define ENC_IN_LEFT_A 2
 #define ENC_IN_RIGHT_A 5
 #define RXD2 16
 #define TXD2 17
@@ -53,14 +53,14 @@ long currentMillis = 0;
 ////////////////// Motor Controller Variables and Constants ///////////////////
 
 // Motor A connections
-const int enA = 13;
-const int in1 = 12;
-const int in2 = 14;
+const int enA = 19;
+const int in1 = 21;
+const int in2 = 22;
 
 // Motor B connections
-const int enB = 27;
-const int in3 = 26;
-const int in4 = 25;
+const int enB = 13;
+const int in3 = 12;
+const int in4 = 14;
 
 const int freq = 30000;
 const int pwmChannel = 0;

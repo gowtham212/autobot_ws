@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find serial_pkg)/launch/serial.launch" />
+    <node pkg="autobot_nav" type="rviz2dClick" name="pose_init" output="screen" />
+    <node pkg="autobot_nav" type="odom_pub" name="odom_publisher" output="screen" />
+    <node pkg="rviz" type="rviz" name="rviz"></node>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom" />
+
+    <param name="robot_description" command="$(find xacro)/xacro '$(find autobot_description)/urdf/autobot.xacro'" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="False" />
+    </node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <!--  -->
+    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="statictf" args="0 0 0 0 3.14 0 world usb_cam"/> -->
+
+</launch>
