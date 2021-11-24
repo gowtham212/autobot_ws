@@ -13,6 +13,9 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf2_geometry_msgs
   tf2_ros
+  amcl
+  map_server
+  move_base
 )
 
 ## System dependencies are found with CMake's conventions
