@@ -81,7 +81,7 @@ const double WHEEL_BASE = 0.17;
 
 // Number of ticks a wheel makes moving a linear distance of 1 meter
 // This value was measured manually.
-const double TICKS_PER_METER = 3100; // Originally 2880
+const double TICKS_PER_METER = 600; // Originally 2880
 
 // Proportional constant, which was measured by measuring the
 // PWM-Linear Velocity relationship for the robot.
