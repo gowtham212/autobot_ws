@@ -3,7 +3,6 @@
     <include file="$(find serial_pkg)/launch/serial.launch" />
     <node pkg="autobot_nav" type="rviz2dClick" name="pose_init" output="screen" />
     <node pkg="autobot_nav" type="odom_pub" name="odom_publisher" output="screen" />
-    <node pkg="rviz" type="rviz" name="rviz"></node>
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom" />
 
     <param name="robot_description" command="$(find xacro)/xacro '$(find autobot_description)/urdf/autobot.xacro'" />

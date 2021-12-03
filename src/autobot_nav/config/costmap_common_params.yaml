@@ -14,7 +14,7 @@ footprint: [[-0.08, -0.075], [-0.08, 0.075], [0.105, 0.075], [0.105, -0.075]]
 #robot_radius: 0.17
 
 # The radius in meters to which the map inflates obstacle cost values.
-inflation_radius: 0.5
+inflation_radius: 1.0
 # A scaling factor to apply to cost values during inflation. 
 # The cost function is computed as follows for all cells in the costmap further than the inscribed radius distance and 
 # closer than the inflation radius distance away from an actual obstacle: 
@@ -22,7 +22,7 @@ inflation_radius: 0.5
 # where costmap_2d::INSCRIBED_INFLATED_OBSTACLE is currently 254. 
 # NOTE: since the cost_scaling_factor is multiplied by a negative in the formula, 
 # increasing the factor will decrease the resulting cost values.
-cost_scaling_factor: 3.0
+cost_scaling_factor: 1.5
 
 # What map type to use. "voxel" or "costmap" are the supported types, 
 # with the difference between them being a 3D-view of the world vs. a 2D-view of the world.
