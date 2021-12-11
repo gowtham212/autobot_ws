@@ -1,37 +1,40 @@
 <launch>
   <!-- Arguments -->
-  <arg name="model" default="diffbot" doc="model type [diffbot, remo]"/>
-  <arg name="map_file" default="$(find autobot_nav)/maps/lab.yaml"/>
+  <arg name="map_file" default="$(find autobot_nav)/maps/lab21.yaml"/>
   <arg name="open_rviz" default="true"/>
-  <arg name="rvizconfig" default="$(find autobot_nav)/rviz/diffbot_navigation.rviz" />
+  <!-- <arg name="rvizconfig" default="$(find autobot_nav)/rviz/autobot_nav.rviz" /> -->
   <arg name="move_forward_only" default="false"/>
   <arg name="local_planner" default="dwa" doc="Local planner can be either dwa, base, teb or pose"/>
 
-  <!-- DiffBot Remote Steering TODO -->
-  <!--include file="$(find diffbot_bringup)/launch/diffbot_remote.launch">
-    <arg name="model" value="$(arg model)" />
-  </include-->
 
+    <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/usb_lidar"/>
+    <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
+    <!--param name="serial_baudrate"     type="int"    value="256000"--><!--A3 -->
+    <param name="frame_id"            type="string" value="laser_link"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="true"/>
+    </node>
 
   <!-- Map server -->
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
-
+  <!-- RPLidar A1M8 -->
+  <include file="$(find autobot_nav)/launch/autobot_nav.launch">
+  </include>
   <!-- AMCL -->
-  <include file="$(find diffbot_navigation)/launch/amcl.launch">
-    <arg name="model" value="$(arg model)" />
+  <include file="$(find autobot_nav)/launch/amcl.launch">
   </include>
 
   <!-- move_base -->
-  <include file="$(find diffbot_navigation)/launch/move_base.launch">
-    <arg name="model" value="$(arg model)" />
+  <include file="$(find autobot_nav)/launch/move_base.launch">
     <arg name="local_planner" value="$(arg local_planner)" />
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
 
   <!-- Launch visualization in rviz -->
-  <group if="$(arg open_rviz)"> 
+  <!-- <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true"
           args="-d $(arg rvizconfig)"/>
-  </group>
+  </group> -->
 
 </launch>

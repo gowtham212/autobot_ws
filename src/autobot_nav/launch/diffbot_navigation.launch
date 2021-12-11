@@ -1,7 +1,7 @@
 <launch>
   <!-- Arguments -->
-  <arg name="model" default="diffbot" doc="model type [diffbot, remo]"/>
-  <arg name="map_file" default="$(find diffbot_navigation)/maps/map.yaml"/>
+  <!-- <arg name="model" default="diffbot" doc="model type [diffbot, remo]"/> -->
+  <arg name="map_file" default="$(find autobot_nav)/maps/lab3.yaml"/>
   <arg name="open_rviz" default="true"/>
   <arg name="move_forward_only" default="false"/>
   <arg name="local_planner" default="dwa" doc="Local planner can be either dwa, base, teb or pose"/>
@@ -13,14 +13,15 @@
 
   <!-- Map server -->
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+  <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
 
   <!-- AMCL -->
-  <include file="$(find diffbot_navigation)/launch/amcl.launch">
-    <arg name="model" value="$(arg model)" />
+  <include file="$(find autobot_nav)/launch/amcl.launch">
+    <!-- <arg name="model" value="$(arg model)" /> -->
   </include>
 
   <!-- move_base -->
-  <include file="$(find diffbot_navigation)/launch/move_base.launch">
+  <include file="$(find autobot_nav)/launch/move_base.launch">
     <arg name="model" value="$(arg model)" />
     <arg name="local_planner" value="$(arg local_planner)" />
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
@@ -29,6 +30,6 @@
   <!-- rviz -->
   <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true"
-          args="-d $(find diffbot_navigation)/rviz/$(arg model)_navigation.rviz"/>
+          args="-d $(find autobot_nav)/rviz/$(arg model)_navigation.rviz"/>
   </group>
 </launch>

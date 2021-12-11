@@ -88,7 +88,7 @@
   <!-- 
     Adding a laser scan sensor to the robot 
   -->
-  <link name="sensor_laser">
+  <link name="laser_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <mass value="1" />
@@ -119,9 +119,9 @@
   </link>
 
   <joint name="joint_sensor_laser" type="fixed">
-    <origin xyz="0.15 0 0.05" rpy="0 0 0"/>
+    <origin xyz="0.15 0 0.05" rpy="0 0 3.14"/>
     <parent link="base_link"/>
-    <child link="sensor_laser"/>
+    <child link="laser_link"/>
   </joint>
 
   <!-- 
@@ -137,7 +137,7 @@
 
     see: http://gazebosim.org/tutorials?tut=ros_gzplugins#GPULaser for more information
   -->
-  <gazebo reference="sensor_laser">
+  <gazebo reference="laser_link">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
